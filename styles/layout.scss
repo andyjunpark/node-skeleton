@@ -2,5 +2,44 @@
 
 body,
 html {
-  margin: 0;
+}
+
+.main {
+  display: flex;
+  background-color: #fff;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+h2 {
+  margin: 5% 5% 2% 5%;
+}
+
+.create-resource {
+  flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  max-width:800px;
+  margin: 0 5% 0 5%;
+}
+
+.create-resource form, label, textarea, input {
+  width:100%;
+}
+
+.create-resource textarea, input{
+  background-color: rgb(236, 236, 236);
+  border: 0.2em;
+  border-style: none none solid none;
+  border-color: #fff;
+  outline: none;
+  overflow: auto;
+  resize: none;
+}
+
+.create-resource button {
+  display: flex;
 }

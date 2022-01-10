@@ -7,7 +7,7 @@
    <!-- Bootstrap CSS -->
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
    <link rel="stylesheet" href="/styles/register.css" type="text/css" />
-   <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <script type="text/javascript" src="/scripts/app.js"></script>
@@ -15,6 +15,26 @@
 </head>
 <body>
   <%- include('partials/_header') %>
+
+  <!-- Create a resource post-->
+  <h2>Home</h2>
+  <section class="create-resource">
+    <div class="card">
+    <div class="card-body">
+      <form method="" action="" id ="">
+        <label for="title"></label>
+        <input type="text" id="title" name="title" placeholder="Title">
+        <textarea name="content" id="content" placeholder="What would you like to share?"></textarea>
+        <select class="form-select" aria-label="Topics">
+          <option selected>Topics</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+        <button class="btn btn-primary" type="submit" value="clear" onclick="">Post</button>
+      </form>
+    </div>
+  </section>
 
 </body>
 </html>
