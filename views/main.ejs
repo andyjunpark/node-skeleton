@@ -41,32 +41,33 @@
 
   <h2>Posts</h2>
   <!-- Get Posts-->
+  <% for (let resource of resources) { %>
   <section class="create-resource">
     <div class="card" style="width: 40rem;">
       <div class="card-body">
         <h5 class="card-title" id="topic">Topic 1</h5>
-        <h3 class="title">This is a Title</h3>
-        <p>This is some contents on the page posted by someone</p>
-        <a href="#">shared resource url</a>
+        <h3 class="title"><%= resource.title %></h3>
+        <p><%= resource.description %></p>
+        <a href="<%= resource.url %>" target="_blank"><%= resource.url %></a>
         <ul class="list-group list-group-flush">
           <li class="list-group-item d-flex justify-content-around">
-            <a id="like-button"><i class="far fa-thumbs-up"></i> Like</a>
+            <a id="like-button"><%= resource.like_amount %> <i class="far fa-thumbs-up"></i> Like</a>
             <a id="save-button"><i class="far fa-star"></i> Save</a>
           </li>
           <li class="list-group-item">
-            <label for="customRange1" class="form-label">Rate</label>
+            <label for="customRange1" class="form-label"><%= resource.rating %>Rate</label>
             <input type="range" class="form-range" id="customRange1" min="0" max="5">
           </li>
         </ul>
         <div class="card-footer text-muted">
           <textarea name="content" id="content" placeholder="Write a comment"></textarea>
-        <h5>This is a comment</h5>
-        <p>by <b>Someone</b></p>
+        <h5><%= resource.comment %></h5>
+        <p>by <%= resource.user_name %></p>
         <p class="card-text"><small class="text-muted">Last updated 1 mins ago</small></p>
       </div>
     </div>
   </section>
-
+  <% } %>
   <!-- jquery bootstrap -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
