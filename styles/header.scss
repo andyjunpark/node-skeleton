@@ -1,0 +1,19 @@
+input {
+  position: relative;
+}
+
+i {
+  position: fixed;
+  z-index: 1;
+  color: #495057;
+  padding: 10px;
+}
+
+.form-control {
+  padding: 0.375rem 1.75rem;
+  border-radius: 1.25rem;
+}
+
+// .search-bar input {
+//   min-width: 600px;
+// }
