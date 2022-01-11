@@ -9,7 +9,7 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
+  router.get("/users", (req, res) => {
     db.query(`SELECT * FROM users;`)
       .then(data => {
         const users = data.rows;
@@ -21,5 +21,24 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
+  router.get("/", (req, res) => {
+    // console.log("DB------", db);
+    // resourceQueries.allResources(db)
+    db.query('SELECT * FROM resources')
+      .then(data => {
+        const resources = data.rows[0];
+        console.log("resources____", resources);
+
+        const templateVars = { title: resources.title, description: resources.description, url: resources.url };
+        res.render("main");
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
   return router;
 };
