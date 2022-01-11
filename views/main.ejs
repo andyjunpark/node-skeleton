@@ -5,12 +5,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <!-- Bootstrap CSS -->
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-   <link rel="stylesheet" href="/styles/register.css" type="text/css" />
-   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" href="/styles/register.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <script type="text/javascript" src="/scripts/app.js"></script>
+  <script src="https://kit.fontawesome.com/fbd5533038.js" crossorigin="anonymous"></script>
   <title>Document</title>
 </head>
 <body>
@@ -19,13 +20,13 @@
   <h2>Home</h2>
   <!-- Create a resource post-->
   <section class="create-resource">
-    <div class="card">
+    <div class="card" style="width: 40rem;">
     <div class="card-body">
       <form method="" action="" id ="">
         <label for="title"></label>
         <input type="text" id="title" name="title" placeholder="Title">
         <textarea name="content" id="content" placeholder="What would you like to share?"></textarea>
-        <input type="url" name="url" id="url" placeholder="https://example.com" pattern="https://.*">
+        <input type="url" name="url" id="url" placeholder="https://example.com" pattern="https://.*"><br>
         <select class="form-select" aria-label="Topics">
           <option selected>Topics</option>
           <option value="1">One</option>
@@ -40,17 +41,27 @@
   <h2>Posts</h2>
   <!-- Get Posts-->
   <section class="create-resource">
-    <div class="card">
-    <div class="card-body">
-      <h5 class="card-title" id="topic">Topic 1</h5>
-      <h3 class="title">This is a Title</h3>
-      <p>This is some contents on the page posted by someone</p>
-      <a href="#">shared resource url</a>
-      <div class="card-footer text-muted">
-        <textarea name="content" id="content" placeholder="Write a comment"></textarea>
-      <h5>This is a comment</h5>
-      <p>by <b>Someone</b></p>
-      <p class="card-text"><small class="text-muted">Last updated 1 mins ago</small></p>
+    <div class="card" style="width: 40rem;">
+      <div class="card-body">
+        <h5 class="card-title" id="topic">Topic 1</h5>
+        <h3 class="title">This is a Title</h3>
+        <p>This is some contents on the page posted by someone</p>
+        <a href="#">shared resource url</a>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item d-flex justify-content-around">
+            <a id="like-button"><i class="far fa-thumbs-up"></i> Like</a>
+            <a id="save-button"><i class="far fa-star"></i> Save</a>
+          </li>
+          <li class="list-group-item">
+            <label for="customRange1" class="form-label">Rate</label>
+            <input type="range" class="form-range" id="customRange1" min="0" max="5">
+          </li>
+        </ul>
+        <div class="card-footer text-muted">
+          <textarea name="content" id="content" placeholder="Write a comment"></textarea>
+        <h5>This is a comment</h5>
+        <p>by <b>Someone</b></p>
+        <p class="card-text"><small class="text-muted">Last updated 1 mins ago</small></p>
       </div>
     </div>
   </section>
