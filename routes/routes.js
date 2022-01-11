@@ -6,7 +6,7 @@ const resourceQueries = require('../db/resources');
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-     resourceQueries.allResources(db)
+    //  resourceQueries.allResources(db)
      db.query(
        `SELECT resources.title, resources.description, resources.url, categories.name, comments.comment, likes.like_amount, ratings.rating, users.user_name
        FROM resources
@@ -14,25 +14,25 @@ module.exports = (db) => {
        JOIN likes ON resources.id = likes.resource_id
        JOIN ratings ON resources.id = ratings.resource_id
        JOIN users ON resources.user_id = users.id
-       JOIN categories ON categories.id = resources.category_id
+       JOIN categories ON categories.id = resources.category_id;
        `)
      .then(data => {
        const resources = data.rows;
-      //  console.log(data.rows);
-       console.log("resources____", resources);
+       console.log(data.rows.length);
+      //  console.log("resources____", resources);
 
       const templateVars = {
         resources: resources,
-        title: resources.title,
-        description: resources.description,
-        url: resources.url,
-        comment: resources.comment,
-        like: resources.like_amount,
-        rating: resources.rating,
-        user_name: resources.user_name,
-        category: resources.name
+        // title: resources.title,
+        // description: resources.description,
+        // url: resources.url,
+        // comment: resources.comment,
+        // like: resources.like_amount,
+        // rating: resources.rating,
+        // user_name: resources.user_name,
+        // category: resources.name
       };
-       console.log("templatevars____", templateVars);
+      //  console.log("templatevars____", templateVars);
        res.render("main", templateVars);
      })
      .catch(err => {
