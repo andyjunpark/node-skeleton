@@ -22,7 +22,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto"> </ul>
       <form class="form-inline my-2 my-lg-0">
-        <button class="btn btn-secondary" type="submit">Log in</button>
+        <button class="btn btn-secondary" formmethod='GET' formaction='/login' type="submit">Log in</button>
 
       </form>
     </div>
@@ -32,17 +32,18 @@
     <h2>Create your account</h2>
     <form class="form-group" action="/register" method="POST">
       <div class="form-group mb-2">
-        <input class="form-control" type="text" name="first-nmae" placeholder="your user name" style="width: 300px; margin: 1em">
+        <input class="form-control" type="text" name="name" placeholder="your user name" style="width: 300px; margin: 1em">
       </div>
-      
+
       <div class="form-group mb-2">
         <input class="form-control" type="email" name="email" placeholder="your email" style="width: 300px; margin: 1em">
       </div>
       <div class="form-group mb-2">
         <input class="form-control" type="password" name="password" placeholder="your password" style="width: 300px; margin: 1em">
       </div>
-      <button class ="btn btn-secondary btn-m btn-block">Register</button>
-    </div>
+      <button class ="btn btn-secondary btn-m btn-block" type="submit">Register</button>
+    </form>
   </main>
+
 </body>
 </html>

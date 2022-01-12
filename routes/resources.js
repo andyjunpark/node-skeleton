@@ -3,6 +3,9 @@
 const express = require('express');
 const router  = express.Router();
 
+
+
+
 module.exports = (db) => {
   router.get("/", (req, res) => {
     db.query(`SELECT resources.title, resources.description, resources.url, categories.name, comments.comment, likes.like_amount , ratings.rating, users.user_name
@@ -18,32 +21,53 @@ module.exports = (db) => {
          const templateVars = {
          resources: resources,
        };
-
-        res.render("main", templateVars);
+       res.render("main", templateVars);
       })
       .catch(err => {
+        console.log("ERROR____", err.message)
         res
           .status(500)
           .json({ error: err.message });
       });
   });
-  router.post("/register", (req, body) => {
-    db.query(`
-    INSERT INTO users (user_name, email, password)
-    VALUES ($1, $2, $3)
-    RETURNING *;
-    `, [body.user_name, body.email, body.password])
-    .then(res => {
-      if (res) {
-        res.render("/login");
-        return res.rows[0];
-      } else {
-        console.log('ERROR in getting all data from my resources');
-        return null;
-      }
+
+  // Adding a new user
+
+  router.post("/register", (req, res) => {
+
+    db.query(`INSERT INTO users(user_name, email, password)
+    VALUES($1 ,$2, $3)
+    RETURNING *;`, [req.body.name, req.body.email, req.body.password])
+    .then((result) => {
+      result.rows
+
+    }
+
+    )
+    .catch((err) => {
+      console.log(err.message)
     })
-    .catch(err => console.error('query error', err.stack));
+    return res.redirect("/login")
   })
+
+  //Log in a user
+
+
+    router.post("/login", (req, res) => {
+      const {email, password} = req.body;
+      db.query (`SELECT * FROM users WHERE email = $1, $2;`, [email, password])
+      .then(user => {
+          if (!user) {
+            res.send({error: "error"});
+            return;
+          }
+          req.session.userId = user.id;
+          console.log("RESPONSE____")
+          res.send({user: {name: user.name, email: user.email, id: user.id}});
+        })
+        .catch(e => res.send(e))
+        return res.redirect("/main")
+      })
   router.get("/login", (req, res) => {
     res.render("login")
   })

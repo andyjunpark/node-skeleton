@@ -36,13 +36,13 @@ INSERT INTO comments (user_id, resource_id, comment, created_at) VALUES
 (1, 1, 'This is a great site, I am using it almost everyday!', '2021-12-04'),
 (2, 2, 'Yoga is my go-to sport now! Thanks!', '2022-01-01'),
 (3, 3, 'I like the easy to understand approach of explanation in this resource', '2021-11-23'),
-(4, 3, 'Very useful website! Thanks!', '2021-12-09'),
-(5, 4, 'Great app for looking for the cheapest flights.', '2021-10-20'),
-(6, 5, 'I wish I had more time to make all those tasty dishes!', '2022-01-05'),
-(7, 6, 'I like this site!', '2021-10-12'),
-(8, 7, 'A great educational website', '2021-12-21'),
-(9, 7, 'Very informative! Thank you!', '2022-01-04'),
-(10, 2, 'Wow! This is the best podcast!', '2021-11-11');
+(4, 4, 'Very useful website! Thanks!', '2021-12-09'),
+(5, 5, 'Great app for looking for the cheapest flights.', '2021-10-20'),
+(6, 6, 'I wish I had more time to make all those tasty dishes!', '2022-01-05'),
+(7, 7, 'I like this site!', '2021-10-12'),
+(8, 8, 'A great educational website', '2021-12-21'),
+(9, 9, 'Very informative! Thank you!', '2022-01-04'),
+(10, 10, 'Wow! This is the best podcast!', '2021-11-11');
 
 INSERT INTO likes (user_id, resource_id, like_amount) VALUES
 (1, 1, 3),
