@@ -2,37 +2,28 @@
 const express = require('express');
 const router  = express.Router();
 const bcrypt = require('bcrypt');
-const resourceQueries = require('../db/resources');
+const dbParams = require('../lib/db.js');
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    //  resourceQueries.allResources(db)
+    //  dbParams
+    //  .allResources(db)
      db.query(
-       `SELECT resources.title, resources.description, resources.url, categories.name, comments.comment, likes.like_amount, ratings.rating, users.user_name
+       `SELECT resources.title, resources.description, resources.url, categories.name, comments.comment, likes.like_amount , ratings.rating, users.user_name
        FROM resources
        JOIN comments ON resources.id = comments.resource_id
        JOIN likes ON resources.id = likes.resource_id
        JOIN ratings ON resources.id = ratings.resource_id
        JOIN users ON resources.user_id = users.id
-       JOIN categories ON categories.id = resources.category_id;
+       JOIN categories ON categories.id = resources.category_id
+       GROUP BY resources.title, resources.description, resources.url, categories.name, comments.comment, likes.like_amount , ratings.rating, users.user_name;
        `)
      .then(data => {
        const resources = data.rows;
-       console.log(data.rows.length);
-      //  console.log("resources____", resources);
-
-      const templateVars = {
+        const templateVars = {
         resources: resources,
-        // title: resources.title,
-        // description: resources.description,
-        // url: resources.url,
-        // comment: resources.comment,
-        // like: resources.like_amount,
-        // rating: resources.rating,
-        // user_name: resources.user_name,
-        // category: resources.name
       };
-      //  console.log("templatevars____", templateVars);
+
        res.render("main", templateVars);
      })
      .catch(err => {
@@ -41,30 +32,29 @@ module.exports = (db) => {
          .json({ error: err.message });
      });
  });
+//  router.post("/", (req, res) => {
+//    db.query(
+//      `INSERT INTO resources (url, title, description)
+//      VALUES ($1, $2, $3)
+//      RETURNING *;`[body.url, body.title, body.description])
+//      .then(res => {
+//        if (res) {
+//          return res.rows[0];
+//        } else {
+//          console.log('ERROR in adding new resource');
+//          return null;
+//        }
+//      })
+//      .catch(err => console.error('query error', err.stack));
+//  });
+
+//  router.post("/register", (req, res) => {
+//    db.query
+//     .addNewUser(db, req.body )
+//  })
 
 
 
 
-  router.get("/login", (req, res) => {
-    res.render("login")
-  })
-  router.get("/register", (req, res) => {
-    res.render("register")
-  })
-  // router.get("/register", (req, res) => {
-  //   res.render("register")
-  // })
-  // router.get("/", (req, res) => {
-  //   db.query(`SELECT * FROM users;`)
-  //     .then(data => {
-  //       const users = data.rows;
-  //       res.json({ users });
-  //     })
-  //     .catch(err => {
-  //       res
-  //         .status(500)
-  //         .json({ error: err.message });
-  //     });
-  // });
   return router;
 };
