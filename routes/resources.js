@@ -39,8 +39,6 @@ module.exports = (db) => {
     } else {
       res.redirect("/users/login");
     }
-
-
   });
 
   router.get("/resource", (req, res) => {
@@ -83,6 +81,49 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
+
+  router.get("/profile", (req, res) => {
+    // resourceQueries.allResources(db);
+    db.query(
+      `SELECT resources.title, resources.id, resources.description, resources.url, categories.name, likes.like_amount, ratings.rating, users.user_name
+       FROM resources
+       JOIN comments ON resources.id = comments.resource_id
+       JOIN likes ON resources.id = likes.resource_id
+       JOIN ratings ON resources.id = ratings.resource_id
+       JOIN users ON resources.user_id = users.id
+       JOIN categories ON categories.id = resources.category_id
+       JOIN saves ON resources.id = saves.resource_id
+       WHERE saves.user_id = $1
+       GROUP BY resources.title, resources.id, resources.description, resources.url, categories.name, likes.like_amount, ratings.rating, users.user_name;
+       `, [req.session.userId]
+    )
+      .then((data) => {
+        const resources = data.rows;
+        //  console.log(data.rows);
+        console.log("resources____", resources);
+
+        const templateVars = {
+          resources: resources,
+          title: resources.title,
+          description: resources.description,
+          url: resources.url,
+          comment: resources.comment,
+          like: resources.like_amount,
+          rating: resources.rating,
+          user_name: resources.user_name,
+          category: resources.name,
+        };
+
+        const user = data.rows[0];
+        templateVars.user = user;
+        res.render("profile", templateVars);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+
   router.post("/save-resource/:resource_id", (req, res) => {
     const userId = 1;
     const resourceId = req.params.resource_id;
