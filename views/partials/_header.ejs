@@ -18,23 +18,22 @@
 
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Saved</a>
+            <a class="nav-link" href="http://localhost:8080/resources/resource">Saved</a>
           </li>
           <li class="nav-item active">
             <a class="nav-link" href="#">Profile <span class="sr-only"></span></a>
           </li>
         </ul>
       </div>
-      <% if(user){%>
-        <label>logged in as <%= user.user_name %></label>
+
+
         <form method="POST" action="/users/logout">
           <button
                     type="submit">
                 logout
             </button>
         </form>
-      <% } else{ %>  <a href="http://localhost:8080/users/register">go here to register</a>
-      <a href="http://localhost:8080/users/login">go here to log in</a>
-     <% } %>
+
+    
    </nav>
 </header>

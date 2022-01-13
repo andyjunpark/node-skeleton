@@ -54,9 +54,9 @@ module.exports = (db) => {
        JOIN users ON resources.user_id = users.id
        JOIN categories ON categories.id = resources.category_id
        JOIN saves ON resources.id = saves.resource_id
-       WHERE saves.user_id = 1
-       GROUP BY resources.title, resources.id, resources.description, resources.url, categories.name, likes.like_amount, ratings.rating, users.user_name
-       `
+       WHERE saves.user_id = $1
+       GROUP BY resources.title, resources.id, resources.description, resources.url, categories.name, likes.like_amount, ratings.rating, users.user_name;
+       `, [req.session.userId]
     )
       .then((data) => {
         const resources = data.rows;
@@ -74,6 +74,9 @@ module.exports = (db) => {
           user_name: resources.user_name,
           category: resources.name,
         };
+
+        const user = data.rows[0];
+        templateVars.user = user;
         res.render("resource", templateVars);
       })
       .catch((err) => {
