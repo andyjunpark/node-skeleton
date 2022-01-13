@@ -2,6 +2,7 @@
 
 body,
 html {
+  background-color: #366fb927;
 }
 
 .main {
@@ -15,6 +16,7 @@ html {
 
 h2 {
   margin: 5% 5% 2% 5%;
+  color:#33588a;
 }
 
 .create-resource {
@@ -25,12 +27,21 @@ h2 {
   margin: 0 5% 2% 5%;
 }
 
+.card {
+  box-shadow: 3px 10px 5px #5793e227;
+  transition: 0.3s;
+}
+
+.card:hover {
+  box-shadow: 3px 10px 5px #254063b6;
+}
+
 .create-resource form, label, textarea, input {
   width:100%;
 }
 
 .create-resource textarea, input{
-  background-color: rgb(236, 236, 236);
+  background-color: rgba(233, 233, 233, 0.199);
   border: 0.2em;
   border-style: none none solid none;
   border-color: #fff;
@@ -41,6 +52,7 @@ h2 {
 
 .create-resource button {
   display: flex;
+  margin:10px;
 }
 
 #like-button:hover {
@@ -49,4 +61,8 @@ h2 {
 
 #save-button:hover {
   color: #d5eb5e;
+}
+
+select {
+  width:100%;
 }
