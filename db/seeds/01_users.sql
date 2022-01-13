@@ -46,15 +46,28 @@ INSERT INTO comments (user_id, resource_id, comment, created_at) VALUES
 
 INSERT INTO likes (user_id, resource_id, like_amount) VALUES
 (1, 1, 3),
-(2, 2, 1),
+(2, 2, 3),
 (3, 3, 5),
-(4, 3, 1),
+(4, 3, 5),
 (5, 4, 4),
 (6, 5, 3),
 (7, 6, 5),
 (8, 7, 2),
-(9, 7, 1),
+(9, 7, 2),
 (10, 2, 3);
+
+INSERT INTO saves (user_id, resource_id) VALUES
+(1, 1 ),
+(1, 2 ),
+(2, 2),
+(3, 3),
+(4, 3),
+(5, 4),
+(6, 5),
+(7, 6),
+(8, 7),
+(9, 7),
+(10, 2);
 
 INSERT INTO ratings (user_id, resource_id, rating) VALUES
 (1, 1, 5),
