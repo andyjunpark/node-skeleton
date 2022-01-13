@@ -55,11 +55,11 @@
         <a href="<%= resource.url %>" target="_blank"><%= resource.url %></a>
         <ul class="list-group list-group-flush">
           <li class="list-group-item d-flex justify-content-around">
-            <a id="like-button"><%= resource.like_amount %> <i class="far fa-thumbs-up"></i> Like</a>
+            <a id="like-button"><i class="far fa-thumbs-up"></i> Like  <%= resource.like_amount %></a>
             <a id="save-button"><i class="far fa-star"></i> Save</a>
           </li>
           <li class="list-group-item">
-            <label for="customRange1" class="form-label"><%= resource.rating %>Rate</label>
+            <label for="customRange1" class="form-label">Rating: <%= resource.rating %></label>
             <input type="range" class="form-range" id="customRange1" min="0" max="5">
           </li>
         </ul>
