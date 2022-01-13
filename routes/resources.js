@@ -42,6 +42,26 @@ module.exports = (db) => {
 
 
   });
+  // Adding a new resource to db
+  router.post("/", (req, res) => {
+    console.log("REQ___", req.body);
+    db.query(`INSERT INTO resources (user_id, category_id, title, description, url)
+    VALUES($1 ,$2, $3, $4, $5)
+    RETURNING *;`, [req.session.userId, 2, req.body.title, req.body.description, req.body.url])
+    .then((result) => {
+      console.log("RESULT____", result)
+      if (result) {
+        res.json(result.rows[0])
+      } else {
+        console.log('ERROR in adding new resource');
+        return null;
+      }
+    })
+    .catch((err) => {
+      console.log(err.message)
+    })
+
+  })
 
   router.get("/resource", (req, res) => {
     // resourceQueries.allResources(db);
@@ -117,6 +137,48 @@ module.exports = (db) => {
         console.log(data.rows);
         // const users = data.rows;
         // res.json({ users });
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  router.get("/profile", (req, res) => {
+    db.query(
+      `SELECT resources.title, resources.id, resources.description, resources.url, categories.name, likes.like_amount, ratings.rating, users.user_name, users.email, users.password
+       FROM resources
+       JOIN comments ON resources.id = comments.resource_id
+       JOIN likes ON resources.id = likes.resource_id
+       JOIN ratings ON resources.id = ratings.resource_id
+       JOIN users ON resources.user_id = users.id
+       JOIN categories ON categories.id = resources.category_id
+       JOIN saves ON resources.id = saves.resource_id
+       WHERE saves.user_id = $1
+       GROUP BY resources.title, resources.id, resources.description, resources.url, categories.name, likes.like_amount, ratings.rating, users.user_name, users.email, users.password;
+       `, [req.session.userId]
+    )
+      .then((data) => {
+        const resources = data.rows;
+        //  console.log(data.rows);
+        console.log("resources____", resources);
+
+        const templateVars = {
+          resources: resources,
+          title: resources.title,
+          description: resources.description,
+          url: resources.url,
+          comment: resources.comment,
+          like: resources.like_amount,
+          rating: resources.rating,
+          user_name: resources.user_name,
+          email: resources.email,
+          password: resources.password,
+          category: resources.name,
+        };
+
+        const user = data.rows[0];
+        templateVars.user = user;
+        res.render("profile", templateVars);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
