@@ -1,16 +1,12 @@
 // Client facing scripts here
-function signUp(data) {
-  return $.ajax({
-    method: "POST",
-    url: "/register",
-    data
+$(document).ready(function () {
+  $("#resources-container").on("click", ".save-button", function (event) {
+    event.preventDefault();
+    const resourceId = event.target.dataset.id;
+    $.ajax({
+      url: "/remove-resource",
+      method: "DELETE",
+      data: { resourceId },
+    }).then(function () {});
   });
-}
-
-function logIn(data) {
-  return $.ajax({
-    method: "POST",
-    url: "/login",
-    data
-  });
-}
+});

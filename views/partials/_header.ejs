@@ -11,10 +11,11 @@
           <form class="form-inline my-2 my-lg-0">
             <i class="fas fa-search"></i>
             <input class="form-control mr-sm-2" type="search" placeholder="  Search Resource" aria-label="Search">
-          
+
           </form>
 
         </div>
+
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
             <a class="nav-link" href="#">Saved</a>
@@ -24,5 +25,16 @@
           </li>
         </ul>
       </div>
+      <% if(user){%>
+        <label>logged in as <%= user.user_name %></label>
+        <form method="POST" action="/users/logout">
+          <button
+                    type="submit">
+                logout
+            </button>
+        </form>
+      <% } else{ %>  <a href="http://localhost:8080/users/register">go here to register</a>
+      <a href="http://localhost:8080/users/login">go here to log in</a>
+     <% } %>
    </nav>
 </header>
