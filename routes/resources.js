@@ -83,6 +83,11 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
+
+  router.get("/profile", (req, res) => {
+    res.render("profile")
+  });
+
   router.post("/save-resource/:resource_id", (req, res) => {
     const userId = 1;
     const resourceId = req.params.resource_id;
