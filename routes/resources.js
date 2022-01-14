@@ -9,16 +9,14 @@ const router  = express.Router();
 module.exports = (db) => {
   router.get("/", (req, res) => {
     if(req.session.userId) {
-      db.query(`SELECT resources.title, resources.description, resources.url, categories.name, comments.comment, likes.like_amount , ratings.rating, users.user_name
+      db.query(`SELECT resources.title, resources.description, resources.url, categories.name, users.user_name
        FROM resources
-       JOIN comments ON resources.id = comments.resource_id
-       JOIN likes ON resources.id = likes.resource_id
-       JOIN ratings ON resources.id = ratings.resource_id
-       JOIN users ON resources.user_id = users.id
+        JOIN users ON resources.user_id = users.id
        JOIN categories ON categories.id = resources.category_id
-       GROUP BY resources.title, resources.description, resources.url, categories.name, comments.comment, likes.like_amount , ratings.rating, users.user_name;`)
+       GROUP BY resources.title, resources.description, resources.url, categories.name, users.user_name;`)
        .then(data => {
         const resources = data.rows;
+        console.log("RESOURCES------", resources)
          const templateVars = {
          resources: resources
        };
@@ -27,9 +25,12 @@ module.exports = (db) => {
           const user = data.rows[0];
           templateVars.user = user;
           res.render("main", templateVars);
+
         })
+
         .catch(e => res.send(e))
       })
+     
       .catch(err => {
         console.log("ERROR____", err.message);
         res

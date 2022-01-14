@@ -11,7 +11,7 @@ const createResourceElement = function(data) {
   <div class="card" style="width: 40rem;">
     <div class="card-body">
       <h5 class="card-title" id="topic">${data.resource.name}</h5>
-      <h3 class="title">${resource.title}</h3>
+      <h3 class="title">${data.resource.title}</h3>
       <p>${data.resource.description} </p>
       <a href="${data.resource.url}" target="_blank">${data.resource.url}</a>
       <ul class="list-group list-group-flush">
@@ -27,8 +27,8 @@ const createResourceElement = function(data) {
       </ul>
       <div class="card-footer text-muted">
         <textarea name="content" id="content" placeholder="Write a comment"></textarea>
-      <h5>${resource.comment}  </h5>
-      <p>by ${resource.user_name}</p>
+      <h5>${data.resource.comment}  </h5>
+      <p>by ${data.resource.user_name}</p>
       <p class="card-text"><small class="text-muted">Last updated 1 mins ago</small></p>
     </div>
   </div>
@@ -47,30 +47,36 @@ $(document).ready(function () {
   });
 
   //adding new resources
-  $("#create-form").on("submit", function(data) {
+  $("#resource-container").on("submit", function(event) {
+    event.preventDefault();
     const $data = $(this).serialize();
+    console.log("DATA-----", $data)
       $.ajax({
       method: "POST",
-      url: "/resources",
+      url: "/",
       data: $data
     })
-    .done((res) => {
-      console.log("RESPONSE", res);
+    .then((res) => {
+      console.log("THIS IS LINE 59-------", res)
+      renderResources(res.rows);
     });
     $.post("/", $data)
-      .then(() => {
-        $(".create-resource").val("");
+    .then(() => {
+    $("#create-resource").val("");
 
-        loadTweets();
-      });
-  });
-  })
-  function loadResources() {
-    $.get("/resources")
+        $.get("/")
       .then((data) => {
         renderResources(data);
       });
+      });
+  });
+  })
+  // function loadResources() {
+  //   $.get("/resources")
+  //     .then((data) => {
+  //       renderResources(data);
+  //     });
 
-      loadResources();
+  //     loadResources();
 
-  }
+  // }
