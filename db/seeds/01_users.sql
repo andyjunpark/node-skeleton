@@ -57,16 +57,16 @@ INSERT INTO likes (user_id, resource_id, like_amount) VALUES
 (10, 10, 3);
 
 INSERT INTO saves (user_id, resource_id) VALUES
-(1, 1 ),
-(2, 2),
-(3, 3),
-(4, 4),
-(5, 5),
-(6, 6),
-(7, 7),
-(8, 8),
-(9, 9),
-(10, 10);
+(1, 1 );
+-- (2, 2),
+-- (3, 3),
+-- (4, 4),
+-- (5, 5),
+-- (6, 6),
+-- (7, 7),
+-- (8, 8),
+-- (9, 9),
+-- (10, 10);
 
 INSERT INTO ratings (user_id, resource_id, rating) VALUES
 (1, 1, 5),
